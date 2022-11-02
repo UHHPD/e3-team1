@@ -1,20 +1,41 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <array>
+#include <cmath>
 
+constexpr std::size_t file_length {234};
+constexpr std::size_t bin_amount {11};
+constexpr double mean {3.11538};
 
 double poisson(double mu, int k) {
-    return 0;
+    return pow(mu, k) * exp(-mu) / tgamma(k+1);
+}
+
+double prob(std::array<int, bin_amount> daten, double mu) {
+    double likelihood = 1.;
+    for(int k : daten) {
+        likelihood *= poisson(mu, k);
+    }
+    return likelihood;
 }
 
 int main() {
-    using namespace std;
+    std::array<int, bin_amount> daten {};
 
-
-    ifstream fin("datensumme.txt");
+    std::ifstream fin("datensumme.txt");
     int n_i;
-    for(int i = 0 ; i < 234 ; ++i) {
+    for(int i = 0 ; i < file_length ; ++i) {
         fin >> n_i;
+        daten[n_i]++;
     }
     fin.close();
+
+    std::cout << prob(daten, mean) << std::endl;
+
+    std::ofstream fout("likelihood.txt");
+    for(double mu = 0.; mu <= 6.; mu+=0.1) {
+        fout << mu << " " << prob(daten, mu) << std::endl;
+    }
+    fout.close();
+
 }
