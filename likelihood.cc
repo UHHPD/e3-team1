@@ -81,6 +81,6 @@ int main() {
     std::cout << "mu intervall: " << mu_low << " - " << mu_high << std::endl;
     std::cout << min_mu << " +"<< mu_high-min_mu << " -" << min_mu-mu_low << std::endl;
 
-    std::cout << "Lambda: " << -2*log(likelihood_ratio(daten, min_mu)) << std::endl;
-    std::cout << (-2*log(likelihood_ratio(daten, min_mu)) -233)/sqrt(2*233) << std::endl;
+    std::cout << "Lambda: " << std::endl << -2*log(likelihood_ratio(daten, min_mu)) << std::endl;
+    std::cout << "z: " << std::endl << (-2*log(likelihood_ratio(daten, min_mu)) -233)/sqrt(2*233) << std::endl;
 }
