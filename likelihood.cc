@@ -46,7 +46,7 @@ int main() {
     double log_mean = -2*log(prob(daten, mean));
     double min_log = 1000000;
     double min_mu;
-    for(double mu = 0.; mu <= 6.; mu+=0.1) {
+    for(double mu = 0.; mu <= 6.; mu+=0.001) {
 	double prob_mu = prob(daten, mu);
 	double log_mu = -2*log(prob_mu);
 	double del_log = log_mu - log_mean;
@@ -59,12 +59,13 @@ int main() {
     fout2.close();
     fout3.close();
 
+    std::cout << min_mu+.1 << ", " << prob(daten, min_mu+.1) << std::endl;
     std::cout << "mu= " << min_mu << ", with " << min_log << std::endl;
     
     double mu_low = 0; 
     double mu_high= 0;
     bool mu_low_found = false;
-    for(double mu = 0.; mu <= 6.; mu+=0.1){
+    for(double mu = 0.; mu <= 6.; mu+=0.001){
 	double prob_mu = prob(daten, mu);
 	double log_mu = -2*log(prob_mu);
 	double del_log = log_mu - log_mean;
