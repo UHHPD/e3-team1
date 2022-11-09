@@ -40,7 +40,7 @@ int main() {
 
     std::cout << prob(daten, mean) << std::endl;
 
-    //std::ofstream fout("likelihood.txt");
+    std::ofstream fout("likelihood.txt");
     std::ofstream fout2("nll.txt");
     std::ofstream fout3("deltanll.txt");
     double log_mean = -2*log(prob(daten, mean));
@@ -50,12 +50,12 @@ int main() {
 	double prob_mu = prob(daten, mu);
 	double log_mu = -2*log(prob_mu);
 	double del_log = log_mu - log_mean;
-      //  fout << mu << " " << prob_mu << std::endl;
+        fout << mu << " " << prob_mu << std::endl;
 	fout2 << mu << " " << log_mu << std::endl;
 	fout3 << mu << " " << del_log << std::endl;
 	if (del_log < min_log) {min_log = del_log; min_mu = mu;}
     }
-    //fout.close();
+    fout.close();
     fout2.close();
     fout3.close();
 
