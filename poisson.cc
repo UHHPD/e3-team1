@@ -29,7 +29,7 @@ int main() {
     constexpr double mean = 3.11538;
     std::ofstream fout2("histpoi.txt");
     for(std::size_t k = 0; k < zaehler.size(); ++k) {
-        fout2 << k << " " << lines * poisson(mean, k) << std::endl;
+        fout2 << k << " " << zaehler[k] << " "  << lines * poisson(mean, k) << std::endl;
     }
     fout2.close();
 }
